@@ -1,5 +1,5 @@
 'use strict';
-const User = require('../models/User');
+const { utilizadores } = require('../models/User');
 const Hash = require('../models/auth');
 const crypto = require('crypto');
 const moment = require('moment');
@@ -7,7 +7,7 @@ module.exports = {
     async index(req, res){
         const { email, password } = req.body;
         const { device } = req.headers;
-        const userFinded = await User.findOne({
+        const userFinded = await utilizadores.findOne({
             where: {
                 email,
                 password,

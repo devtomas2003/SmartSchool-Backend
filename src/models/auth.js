@@ -1,18 +1,11 @@
 'use strict';
-const { Model, DataTypes } = require('sequelize');
-class auth_users extends Model{
-    static init(connection){
-        super.init({
-            hash: DataTypes.STRING,
-            expirationTime: DataTypes.DATE,
-            device: DataTypes.STRING
-        }, {
-            sequelize: connection
-        });
+module.exports = (sequelize, DataTypes) => {
+    const auth_users = sequelize.define('auth_users', {
+        nome: DataTypes.STRING,
+        disciplina: DataTypes.INTEGER
+    });
+    auth_users.associate = function(models) {
+        auth_users.belongsTo(models.utilizadores, { foreignKey: 'idUser', as: 'userrelation' });
     }
-    static associate(models){
-        this.belongsTo(models.utilizadores, { foreignKey: 'idUser', as: 'userrelation' })
-    }
-}
-
-module.exports = auth_users;
+    return auth_users;
+};

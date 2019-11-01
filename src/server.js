@@ -1,5 +1,6 @@
 'use strict';
+require('dotenv').config({
+    path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+});
 const app = require('./app');
-require('dotenv').config();
-require('./database');
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 3333);
