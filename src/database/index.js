@@ -1,0 +1,12 @@
+'use strict';
+const Sequelize = require('sequelize');
+const dbConfig = require('../config/database');
+const User = require('../models/User');
+const Profs = require('../models/Profs');
+const Hash = require('../models/auth');
+const connection = new Sequelize(dbConfig);
+User.init(connection);
+Profs.init(connection);
+Hash.init(connection);
+Hash.associate(connection.models);
+module.exports = connection;
