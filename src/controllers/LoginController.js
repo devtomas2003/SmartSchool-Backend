@@ -1,6 +1,5 @@
 'use strict';
-const { utilizadores } = require('../models/User');
-const Hash = require('../models/auth');
+const { utilizadores, auth_users } = require('../models');
 const crypto = require('crypto');
 const moment = require('moment');
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
             }
         });
         if(!userFinded){
-            return res.status(404).json({
+            return res.status(401).json({
                 "error": "Utilizador não encontrado!",
                 "level": 3
             });
@@ -33,19 +32,19 @@ module.exports = {
         }
         var current_date = (new Date()).valueOf().toString();
         var random = Math.random().toString();
-        if(device == "pc"){
-            const hash = await Hash.create({
+        if(device == "web"){
+            const authenticate = await auth_users.create({
                 hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
                 idUser: userFinded.id,
                 expirationTime: moment(new Date()).add(10, 'm').toDate(),
                 device
             });
-            return res.json({
-                "hash": hash.hash,
-                "expiration": hash.expirationTime
+            return res.status(200).json({
+                "hash": authenticate.hash,
+                "expiration": authenticate.expirationTime
             });
         }else{
-            const hash = await Hash.create({
+            const hash = await auth_users.create({
                 hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
                 idUser: userFinded.id,
                 device
