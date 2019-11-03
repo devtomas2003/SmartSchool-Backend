@@ -33,6 +33,11 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false
         },
+        userLevel: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 1
+        },
         ativo: {
           type: Sequelize.INTEGER,
           allowNull: false,

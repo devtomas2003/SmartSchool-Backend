@@ -1,12 +1,12 @@
 'use strict';
-const Prof = require('../models/Profs');
+const { profs } = require('../models');
 module.exports = {
     async store(req, res){
         const { nome, disciplina } = req.body;
-        const profs = await Prof.create({
+        const professores = await profs.create({
             nome,
             disciplina
         });
-        return res.json(profs);
+        return res.json(professores);
     }
 };

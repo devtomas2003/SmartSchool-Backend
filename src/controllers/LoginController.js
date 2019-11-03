@@ -30,8 +30,8 @@ module.exports = {
                 "level": 3
             });
         }
-        var current_date = (new Date()).valueOf().toString();
-        var random = Math.random().toString();
+        const current_date = (new Date()).valueOf().toString();
+        const random = Math.random().toString();
         if(device == "web"){
             const authenticate = await auth_users.create({
                 hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
@@ -39,9 +39,12 @@ module.exports = {
                 expirationTime: moment(new Date()).add(10, 'm').toDate(),
                 device
             });
+            var level;
+            if(userFinded.userLevel == 1){ level = "comum"; }else{ level = "admin"; }
             return res.status(200).json({
                 "hash": authenticate.hash,
-                "expiration": authenticate.expirationTime
+                "expiration": authenticate.expirationTime,
+                "versionPlatform": level
             });
         }else{
             const hash = await auth_users.create({
@@ -51,6 +54,7 @@ module.exports = {
             });
             return res.json({
                 "hash": hash.hash,
+                "versionPlatform": "comum"
             });
         }
     }

@@ -1,9 +1,9 @@
 'use strict';
-const User = require('../models/User');
+const { utilizadores } = require('../models');
 module.exports = {
     async store(req, res){
         const { nome, procNumber, password, email, turma, foto } = req.body;
-        const user = await User.create({
+        const user = await utilizadores.create({
             nome,
             procNumber,
             password,

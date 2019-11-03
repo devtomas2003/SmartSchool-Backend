@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         turma: DataTypes.STRING,
         foto: DataTypes.STRING,
+        userLevel: DataTypes.INTEGER,
         ativo: DataTypes.INTEGER
     });
     return utilizadores;

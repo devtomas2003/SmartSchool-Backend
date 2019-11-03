@@ -1,0 +1,29 @@
+const { auth_users } = require('../models');
+module.exports = async (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if(!authHeader){
+        return res.status(401).json({
+            "error": "Utilizador não autenticado!",
+            "level": "3"
+        });
+    }
+        const [, token] = authHeader.split(" ");
+        const verifyToken = await auth_users.findOne({ where: { hash: token }, include: { association: 'userrelation' }});
+        if(!verifyToken){
+            return res.status(401).json({
+                "error": "Utilizador não autenticado!",
+                "level": "3"
+            });
+        }else{
+            const level = verifyToken.userrelation.userLevel;
+            if(level == 1){
+                return res.status(403).json({
+                    "error": "Area Restrita!",
+                    "level": "3"
+                });
+            }
+        }
+       return next();
+
+
+};
