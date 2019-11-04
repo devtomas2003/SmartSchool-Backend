@@ -2,6 +2,7 @@ const factory = require('../factories');
 const request = require('supertest');
 const app = require('../../src/app');
 const truncate = require('../utils/truncate');
+const moment = require('moment');
 beforeEach(async () => {
     await truncate();
 });
@@ -210,26 +211,19 @@ describe('User Access', () => {
             expect(response.status).toBe(403);
     });
 
-    it('user should be able not access private normal user pages when he have a valid token but expired', async () => {
-        const user = await factory.create('User', {
-            userLevel: 2
-        });
-        const login = await factory.define('createLogin', {
+    it('user should be able not access private normal user pages in web when he have a valid token but expired', async () => {
+        const user = await factory.create('User');
+        const login = await factory.create('createLogin', {
             idUser: user.id,
-            expirationTime: moment(new Date()).add(10, 'm').toDate(),
+            expirationTime: moment(new Date()).subtract(12, 'm').toDate(),
+            device: 'web'
         })
         const response = await request(app)
-            .post('/users')
+            .post('/qrcode')
             .send({
-                "nome": "Tomás Dinis Marques Figueiredo",
-                "procNumber": "16802",
-                "password": "1234",
-                "email": "dev.tomas2003@gmail.com",
-                "turma": "11A",
-                "foto": "default.png"
+                "code": "94ugh9gig"
             })
-            .set('Authorization', "EST " + login.body.hash);
-            expect(response.body.error).toBe("Por favor, acesse esta rota, por uma sessão na web!");
+            .set('Authorization', "EST " + login.hash);
             expect(response.status).toBe(403);
     });
 });
