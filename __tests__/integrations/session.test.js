@@ -38,7 +38,7 @@ describe('Authentication', () => {
         expect(response.body.versionPlatform).toBe("comum");
     });
 
-    it('user should be able make login when he authenticated from web with valid credentials for admin page', async () => {
+    it('admin user should be able make login when he authenticated from web with valid credentials for admin page', async () => {
         const user = await factory.create('User', {
             userLevel: 2
         });
@@ -182,5 +182,54 @@ describe('User Access', () => {
             })
             .set('Authorization', "EST " + login.body.hash);
             expect(response.status).toBe(200);
+    });
+
+    it('admin user should be able access private admin pages only in web version', async () => {
+        const user = await factory.create('User', {
+            userLevel: 2
+        });
+        const login = await request(app)
+            .post('/login')
+            .send({
+                email: user.email,
+                password: user.password
+            })
+            .set('device', 'mobile');
+        const response = await request(app)
+            .post('/users')
+            .send({
+                "nome": "Tomás Dinis Marques Figueiredo",
+                "procNumber": "16802",
+                "password": "1234",
+                "email": "dev.tomas2003@gmail.com",
+                "turma": "11A",
+                "foto": "default.png"
+            })
+            .set('Authorization', "EST " + login.body.hash);
+            expect(response.body.error).toBe("Por favor, acesse esta rota, por uma sessão na web!");
+            expect(response.status).toBe(403);
+    });
+
+    it('user should be able not access private normal user pages when he have a valid token but expired', async () => {
+        const user = await factory.create('User', {
+            userLevel: 2
+        });
+        const login = await factory.define('createLogin', {
+            idUser: user.id,
+            expirationTime: moment(new Date()).add(10, 'm').toDate(),
+        })
+        const response = await request(app)
+            .post('/users')
+            .send({
+                "nome": "Tomás Dinis Marques Figueiredo",
+                "procNumber": "16802",
+                "password": "1234",
+                "email": "dev.tomas2003@gmail.com",
+                "turma": "11A",
+                "foto": "default.png"
+            })
+            .set('Authorization', "EST " + login.body.hash);
+            expect(response.body.error).toBe("Por favor, acesse esta rota, por uma sessão na web!");
+            expect(response.status).toBe(403);
     });
 });

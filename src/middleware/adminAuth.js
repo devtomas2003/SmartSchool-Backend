@@ -21,6 +21,14 @@ module.exports = async (req, res, next) => {
                     "error": "Area Restrita!",
                     "level": "3"
                 });
+            }else{
+                const deviceHeader = verifyToken.device;
+                if(deviceHeader == "mobile"){
+                    return res.status(403).json({
+                        "error": "Por favor, acesse esta rota, por uma sessão na web!",
+                        "level": "2"
+                    });
+                }
             }
         }
        return next();
