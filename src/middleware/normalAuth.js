@@ -1,5 +1,4 @@
 const { auth_users } = require('../models');
-const moment = require('moment');
 module.exports = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if(!authHeader){
@@ -17,9 +16,9 @@ module.exports = async (req, res, next) => {
             });
         }
         if(verifyToken.device == "web"){
-            const expireTo = moment(verifyToken.expirationTime);
-            const now = moment(new Date());
-            if(expireTo.diff(now) > 0){
+            const expireTo = new Date(verifyToken.expirationTime);
+            const now = new Date();
+            if(now > expireTo){
                 return res.status(401).json({
                     "error": "Sessão expirada! Inicie novamente sessão!",
                     "level": "2"

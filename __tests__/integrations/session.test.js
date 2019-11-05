@@ -224,6 +224,6 @@ describe('User Access', () => {
                 "code": "94ugh9gig"
             })
             .set('Authorization', "EST " + login.hash);
-            expect(response.status).toBe(403);
+            expect(response.status).toBe(401);
     });
 });
