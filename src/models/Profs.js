@@ -1,7 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const profs = sequelize.define('profs', {
-        nome: DataTypes.STRING,
-        disciplina: DataTypes.INTEGER
+        nome: DataTypes.STRING
     });
     return profs;
 };
