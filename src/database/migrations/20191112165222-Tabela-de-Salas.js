@@ -13,12 +13,8 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      expirationTime:{
-        type: Sequelize.DATE,
-        allowNull: true
-      },
-      ativo: {
-        type: Sequelize.INTEGER,
+      hash: {
+        type: Sequelize.STRING,
         allowNull: false
       }
     });
