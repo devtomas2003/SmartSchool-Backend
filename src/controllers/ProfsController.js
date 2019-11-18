@@ -2,11 +2,12 @@
 const { profs } = require('../models');
 module.exports = {
     async store(req, res){
-        const { nome, disciplina } = req.body;
-        const professores = await profs.create({
-            nome,
-            disciplina
+        const { nome } = req.body;
+        await profs.create({
+            nome
         });
-        return res.json(professores);
+        return res.status(201).json({
+            "status": "`Sucesso o(a) professor ${nome} foi registado com sucesso!´"
+        });
     }
 };

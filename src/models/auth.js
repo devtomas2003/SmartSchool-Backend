@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes) => {
         hash: DataTypes.STRING,
         expirationTime: DataTypes.DATE,
         device: DataTypes.STRING
+    }, {
+        sequelize,
+        tableName: 'auth_users'
     });
     auth_users.associate = function(models) {
         auth_users.belongsTo(models.utilizadores, { foreignKey: 'idUser', as: 'userrelation' });

@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         foto: DataTypes.STRING,
         userLevel: DataTypes.INTEGER,
         ativo: DataTypes.INTEGER
+    }, {
+        sequelize,
+        tableName: 'utilizadores'
     });
     return utilizadores;
 };
