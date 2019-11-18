@@ -19,7 +19,7 @@ module.exports = {
           onDelete: 'CASCADE'
         }
       },
-      idSubject: {
+      idDisciplina: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

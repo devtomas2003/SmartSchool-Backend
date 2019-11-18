@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         disciplina: DataTypes.STRING
     });
     disciplinas.associate = function(models) {
-        disciplinas.belongsToMany(models.profs, { foreignKey: 'idSubject', through: 'profsDisciplinas', as: 'disciplinasProfs' });
+        disciplinas.belongsToMany(models.profs, { foreignKey: 'idDisciplina', through: 'profsDisciplinas', as: 'disciplinasProfs' });
         disciplinas.belongsToMany(models.salas, { foreignKey: 'idDisciplina', through: 'salasDisciplinas', as: 'disciplinasSalas' });
     }
     return disciplinas;
