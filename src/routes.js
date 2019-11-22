@@ -4,7 +4,9 @@ const routes = express.Router();
 const UserController = require('./controllers/UserController');
 const ProfController = require('./controllers/ProfsController');
 const LoginController = require('./controllers/LoginController');
-const PasswordRecover = require('./controllers/RecoverController')
+const PasswordRecover = require('./controllers/RecoverController');
+const disciplinaController = require('./controllers/disciplinaController');
+const salaController = require('./controllers/salaController');
 const authNormalUser = require('./middleware/normalAuth');
 const adminAuth = require('./middleware/adminAuth');
 routes.post('/login', LoginController.index);
@@ -15,6 +17,7 @@ routes.post('/qrcode', (req, res) => {
 });
 routes.use(adminAuth);
 routes.post('/users', UserController.store);
-routes.post('/profs', ProfController.store);
-
+routes.post('/prof', ProfController.store);
+routes.post('/disciplina', disciplinaController.store);
+routes.post('/sala', salaController.store);
 module.exports = routes;

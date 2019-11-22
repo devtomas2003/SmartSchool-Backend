@@ -7,7 +7,7 @@ module.exports = {
             nome
         });
         return res.status(201).json({
-            "status": "`Sucesso o(a) professor ${nome} foi registado com sucesso!´"
+            "status": `Sucesso o(a) professor ${nome} foi registado com sucesso!`
         });
     }
 };
