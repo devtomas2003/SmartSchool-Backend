@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('diasSalas', {
+    return queryInterface.createTable('DiasSalas', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'salas',
+          model: 'Salas',
           key: 'id',
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'diasDaSemana',
+          model: 'DiasDaSemana',
           key: 'id',
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
@@ -33,6 +33,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('diasSalas');
+      return queryInterface.dropTable('DiasSalas');
   }
 };

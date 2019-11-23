@@ -1,5 +1,5 @@
 'use strict';
-const { recuperationPass } = require('../models');
+const { Recuperation } = require('../models');
 const mailer = require('nodemailer');
 module.exports = {
     async index(req, res){

@@ -1,12 +1,12 @@
 'use strict';
-const { utilizadores, auth_users } = require('../models');
+const { Utilizadores, Auth } = require('../models');
 const crypto = require('crypto');
 const moment = require('moment');
 module.exports = {
     async index(req, res){
         const { email, password } = req.body;
         const { device } = req.headers;
-        const userFinded = await utilizadores.findOne({
+        const userFinded = await Utilizadores.findOne({
             where: {
                 email,
                 password,
@@ -33,7 +33,7 @@ module.exports = {
         const current_date = (new Date()).valueOf().toString();
         const random = Math.random().toString();
         if(device == "web"){
-            const authenticate = await auth_users.create({
+            const authenticate = await Auth.create({
                 hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
                 idUser: userFinded.id,
                 expirationTime: moment(new Date()).add(10, 'm').toDate(),
@@ -47,7 +47,7 @@ module.exports = {
                 "versionPlatform": level
             });
         }else{
-            const hash = await auth_users.create({
+            const hash = await Auth.create({
                 hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
                 idUser: userFinded.id,
                 device

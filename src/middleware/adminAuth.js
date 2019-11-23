@@ -1,5 +1,5 @@
 'use strict';
-const { auth_users } = require('../models');
+const { Auth } = require('../models');
 module.exports = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if(!authHeader){
@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
         });
     }
         const [, token] = authHeader.split(" ");
-        const verifyToken = await auth_users.findOne({ where: { hash: token }, include: { association: 'userrelation' }});
+        const verifyToken = await Auth.findOne({ where: { hash: token }, include: { association: 'userrelation' }});
         if(!verifyToken){
             return res.status(401).json({
                 "error": "Utilizador não autenticado!",

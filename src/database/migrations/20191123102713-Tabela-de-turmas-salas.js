@@ -2,39 +2,37 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Auth', {
+    return queryInterface.createTable('TurmasSalas', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      hash: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      idUser: {
+      idTurma: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Utilizadores',
+          model: 'Turmas',
           key: 'id',
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
         }
       },
-      expirationTime:{
-        type: Sequelize.DATE,
-        allowNull: true
-      },
-      device: {
-        type: Sequelize.STRING,
-        allowNull: false
+      idSala: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Salas',
+          key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
       }
     });
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('Auth');
+      return queryInterface.dropTable('TurmasSalas');
   }
 };

@@ -1,9 +1,9 @@
 'use strict';
-const { disciplinas } = require('../models');
+const { Disciplinas } = require('../models');
 module.exports = {
     async store(req, res){
         const { nome } = req.body;
-        await disciplinas.create({
+        await Disciplinas.create({
             disciplina: nome
         });
         return res.status(201).json({

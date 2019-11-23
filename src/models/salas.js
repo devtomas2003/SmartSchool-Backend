@@ -1,17 +1,18 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const salas = sequelize.define('salas', {
+    const Salas = sequelize.define('Salas', {
         sala: DataTypes.STRING,
         hash: DataTypes.STRING
     }, {
         sequelize,
-        tableName: 'salas'
+        tableName: 'Salas'
     });
-    salas.associate = function(models) {
-        salas.belongsToMany(models.profs, { foreignKey: 'idSala', through: 'profsSalas', as: 'profsSalasdois' });
-        salas.belongsToMany(models.disciplinas, { foreignKey: 'idSala', through: 'salasDisciplinas', as: 'salasDisciplinasum' });
-        salas.belongsToMany(models.horarios, { foreignKey: 'idSala', through: 'salasHorarios', as: 'salasHorariosum' });
-        salas.belongsToMany(models.diasDaSemana, { foreignKey: 'idSala', through: 'diasSalas', as: 'diasSalasdois' });
+    Salas.associate = function(models) {
+        Salas.belongsToMany(models.Profs, { foreignKey: 'idSala', through: 'ProfsSalas', as: 'profsSalasdois' });
+        Salas.belongsToMany(models.Disciplinas, { foreignKey: 'idSala', through: 'SalasDisciplinas', as: 'salasDisciplinasum' });
+        Salas.belongsToMany(models.Horarios, { foreignKey: 'idSala', through: 'SalasHorarios', as: 'salasHorariosum' });
+        Salas.belongsToMany(models.DiasDaSemana, { foreignKey: 'idSala', through: 'DiasSalas', as: 'diasSalasdois' });
+        Salas.belongsToMany(models.Turmas, { foreignKey: 'idSala', through: 'TurmasSalas', as: 'turmasSalasdois' });
     }
-    return salas;
+    return Salas;
 };

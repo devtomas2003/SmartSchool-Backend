@@ -1,14 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const profs = sequelize.define('profs', {
+    const Profs = sequelize.define('Profs', {
         nome: DataTypes.STRING
     }, {
         sequelize,
-        tableName: 'profs'
+        tableName: 'Profs'
     });
-    profs.associate = function(models) {
-        profs.belongsToMany(models.salas, { foreignKey: 'idProf', through: 'profsSalas', as: 'profsSalasum' });
-        profs.belongsToMany(models.disciplinas, { foreignKey: 'idProf', through: 'profsDisciplinas', as: 'disciplinasProfsdois' });
+    Profs.associate = function(models) {
+        Profs.belongsToMany(models.Salas, { foreignKey: 'idProf', through: 'ProfsSalas', as: 'profsSalasum' });
+        Profs.belongsToMany(models.Disciplinas, { foreignKey: 'idProf', through: 'ProfsDisciplinas', as: 'disciplinasProfsdois' });
+        Profs.belongsToMany(models.Turmas, { foreignKey: 'idProf', through: 'TurmasProfs', as: 'turmasProfsdois' });
     }
-    return profs;
+    return Profs;
 };

@@ -1,15 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const recuperationPass = sequelize.define('recuperationPass', {
+    const RecuperationPass = sequelize.define('RecuperationPass', {
         hash: DataTypes.STRING,
         expirationTime: DataTypes.DATE,
         ativo: DataTypes.INTEGER
     }, {
         sequelize,
-        tableName: 'recuperationPass'
+        tableName: 'RecuperationPass'
     });
-    recuperationPass.associate = function(models) {
-        recuperationPass.belongsTo(models.utilizadores, { foreignKey: 'idUser', as: 'userrelation' });
+    RecuperationPass.associate = function(models) {
+        RecuperationPass.belongsTo(models.Utilizadores, { foreignKey: 'idUser', as: 'userrelation' });
     }
-    return recuperationPass;
+    return RecuperationPass;
 };

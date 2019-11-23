@@ -1,14 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const horarios = sequelize.define('horarios', {
+    const Horarios = sequelize.define('Horarios', {
         startTime: DataTypes.DATE,
         endTime: DataTypes.DATE
     }, {
         sequelize,
-        tableName: 'horarios'
+        tableName: 'Horarios'
     });
-    horarios.associate = function(models) {
-        horarios.belongsToMany(models.salas, { foreignKey: 'idHorario', through: 'salasHorarios', as: 'salasHorariosdois' });
+    Horarios.associate = function(models) {
+        Horarios.belongsToMany(models.Salas, { foreignKey: 'idHorario', through: 'SalasHorarios', as: 'salasHorariosdois' });
     }
-    return horarios;
+    return Horarios;
 };

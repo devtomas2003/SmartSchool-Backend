@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const utilizadores = sequelize.define('utilizadores', {
+    const Utilizadores = sequelize.define('Utilizadores', {
         nome: DataTypes.STRING,
         procNumber: DataTypes.INTEGER,
         password: DataTypes.STRING,
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         ativo: DataTypes.INTEGER
     }, {
         sequelize,
-        tableName: 'utilizadores'
+        tableName: 'Utilizadores'
     });
-    return utilizadores;
+    return Utilizadores;
 };

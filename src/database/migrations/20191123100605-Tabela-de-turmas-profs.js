@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ProfsSalas', {
+    return queryInterface.createTable('TurmasProfs', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -19,11 +19,11 @@ module.exports = {
         onDelete: 'CASCADE'
       }
     },
-    idSala: {
+    idTurma: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
-        model: 'Salas',
+        model: 'Turmas',
         key: 'id',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
@@ -32,6 +32,6 @@ module.exports = {
   });
 },
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('ProfsSalas');
+      return queryInterface.dropTable('TurmasProfs');
   }
 };

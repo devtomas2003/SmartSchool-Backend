@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('horarios', {
+      return queryInterface.createTable('Horarios', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -10,17 +10,17 @@ module.exports = {
         allowNull: false
       },
       startTime: {
-        type: Sequelize.DATE,
+        type: Sequelize.TIME,
         allowNull: false
       },
       endTime: {
-        type: Sequelize.DATE,
+        type: Sequelize.TIME,
         allowNull: false
       }
     });
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('horarios');
+      return queryInterface.dropTable('Horarios');
   }
 };

@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const diasDaSemana = sequelize.define('diasDaSemana', {
+    const DiasDaSemana = sequelize.define('DiasDaSemana', {
         dia: DataTypes.STRING
     }, {
         sequelize,
-        tableName: 'diasDaSemana'
+        tableName: 'DiasDaSemana'
     });
-    diasDaSemana.associate = function(models) {
-        diasDaSemana.belongsToMany(models.salas, { foreignKey: 'idSala', through: 'diasSalas', as: 'diasSalasum' });
+    DiasDaSemana.associate = function(models) {
+        DiasDaSemana.belongsToMany(models.Salas, { foreignKey: 'idSala', through: 'DiasSalas', as: 'diasSalasum' });
     }
-    return diasDaSemana;
+    return DiasDaSemana;
 };
