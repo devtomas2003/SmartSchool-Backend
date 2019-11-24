@@ -23,4 +23,8 @@ routes.post('/disciplina', disciplinaController.store);
 routes.post('/sala', salaController.novaSala);
 routes.post('/horario', salaController.horario);
 routes.post('/turma', turmaController.store);
+routes.post('/editTurma', turmaController.update);
+routes.post('/editSala', salaController.update);
+routes.post('/editDisciplina', disciplinaController.update);
+routes.post('/editProfs', ProfController.update);
 module.exports = routes;

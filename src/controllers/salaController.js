@@ -4,14 +4,33 @@ const crypto = require('crypto');
 module.exports = {
     async novaSala(req, res){
         const { sala } = req.body;
+        const upSala = sala.toUpperCase();
         const current_date = (new Date()).valueOf().toString();
         const random = Math.random().toString();
-        await Salas.create({
-            sala,
+        const newSala = await Salas.create({
+            upSala,
             hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
         });
         return res.status(201).json({
-            "status": `Sucesso a sala ${sala} foi registada com sucesso!`
+            "status": `Sucesso a sala ${upSala} foi registada com sucesso! ID: ${newSala.id}`
+        });
+    },
+    async update(req, res){
+        const { id, sala } = req.body;
+        const upSala = sala.toUpperCase();
+        const salalast = await Salas.findByPk(id);
+        if(!salalast){
+            return res.status(404).json({
+                "status": `A sala com o id ${id} não existe!`
+            });
+        }
+        await Salas.update({
+            upSala
+        },{
+            where: { id }
+        });
+        return res.status(200).json({
+            "status": `Sucesso a sala com o nome ${salalast.sala} foi alterada para ${upSala}`
         });
     },
     async horario(req, res){
