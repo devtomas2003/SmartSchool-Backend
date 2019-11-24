@@ -7,9 +7,9 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'Turmas'
     });
     Turmas.associate = function(models) {
-        Turmas.belongsToMany(models.Profs, { foreignKey: 'idTurma', through: 'TurmasProfs', as: 'turmasProfsum' });
-        Turmas.belongsToMany(models.Disciplinas, { foreignKey: 'idTurma', through: 'TurmasDisciplinas', as: 'turmasDisciplinasum' });
-        Turmas.belongsToMany(models.Salas, { foreignKey: 'idTurma', through: 'TurmasSalas', as: 'turmasSalasum' });
+        Turmas.belongsToMany(models.Profs, { foreignKey: 'idTurma', through: 'TurmasProfs', as: 'Turmasprofs' });
+        Turmas.belongsToMany(models.Disciplinas, { foreignKey: 'idTurma', through: 'TurmasDisciplinas', as: 'Turmasdisciplinas' });
+        Turmas.belongsToMany(models.Salas, { foreignKey: 'idTurma', through: 'TurmasSalas', as: 'Turmassalas' });
     }
     return Turmas;
 };

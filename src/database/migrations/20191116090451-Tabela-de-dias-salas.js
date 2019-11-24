@@ -19,7 +19,7 @@ module.exports = {
           onDelete: 'CASCADE'
         }
       },
-      idHorario: {
+      idDia: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

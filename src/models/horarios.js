@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         tableName: 'Horarios'
     });
     Horarios.associate = function(models) {
-        Horarios.belongsToMany(models.Salas, { foreignKey: 'idHorario', through: 'SalasHorarios', as: 'salasHorariosdois' });
+        Horarios.belongsToMany(models.Salas, { foreignKey: 'idHorario', through: 'SalasHorarios', as: 'salasHorarios' });
     }
     return Horarios;
 };
