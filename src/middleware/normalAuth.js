@@ -5,7 +5,8 @@ module.exports = async (req, res, next) => {
     if(!authHeader){
         return res.status(401).json({
             "error": "Utilizador não autenticado!",
-            "level": "3"
+            "level": "3",
+            "showIn": "box"
         });
     }
         const [, token] = authHeader.split(" ");
@@ -13,7 +14,8 @@ module.exports = async (req, res, next) => {
         if(!verifyToken){
             return res.status(401).json({
                 "error": "Utilizador não autenticado!",
-                "level": "3"
+                "level": "3",
+                "showIn": "box"
             });
         }
         if(verifyToken.device == "web"){
@@ -22,7 +24,8 @@ module.exports = async (req, res, next) => {
             if(now >= expireTo){
                 return res.status(401).json({
                     "error": "Sessão expirada! Inicie novamente sessão!",
-                    "level": "2"
+                    "level": "2",
+                    "showIn": "box"
                 });
             }
         }

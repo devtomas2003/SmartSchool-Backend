@@ -15,19 +15,22 @@ module.exports = {
         if(!userFinded){
             return res.status(401).json({
                 "error": "Utilizador não encontrado!",
-                "level": 3
+                "level": 3,
+                "showIn": "text"
             });
         }
         if(userFinded.ativo != 1){
             return res.status(405).json({
                 "error": "Conta desativada! Entra em contato com a sua escola!",
-                "level": 2
+                "level": 2,
+                "showIn": "box"
             });
         }
         if(!device){
             return res.status(400).json({
                 "error": "Ops! Ocorreu um erro inesperado!",
-                "level": 3
+                "level": 3,
+                "showIn": "box"
             });
         }
         const current_date = (new Date()).valueOf().toString();
