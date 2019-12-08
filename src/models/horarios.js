@@ -7,8 +7,5 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         tableName: 'Horarios'
     });
-    Horarios.associate = function(models) {
-        Horarios.belongsToMany(models.Salas, { foreignKey: 'idHorario', through: 'SalasHorarios', as: 'salasHorarios' });
-    }
     return Horarios;
 };

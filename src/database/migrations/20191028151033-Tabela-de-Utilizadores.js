@@ -28,6 +28,12 @@ module.exports = {
         turma: {
           type: Sequelize.STRING,
           allowNull: false
+          // references: {
+          //   model: 'Turmas',
+          //   key: 'id',
+          //   onUpdate: 'CASCADE',
+          //   onDelete: 'CASCADE'
+          // }
         },
         foto: {
           type: Sequelize.STRING,

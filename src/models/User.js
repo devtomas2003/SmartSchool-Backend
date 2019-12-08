@@ -1,3 +1,4 @@
+'use strict';
 module.exports = (sequelize, DataTypes) => {
     const Utilizadores = sequelize.define('Utilizadores', {
         nome: DataTypes.STRING,
@@ -8,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         foto: DataTypes.STRING,
         userLevel: DataTypes.INTEGER,
         ativo: DataTypes.INTEGER
-    }, {
+    },{
         sequelize,
         tableName: 'Utilizadores'
     });

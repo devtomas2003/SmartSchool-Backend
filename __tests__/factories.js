@@ -2,8 +2,8 @@ const joker = require('faker');
 const { factory } = require('factory-girl');
 const crypto = require('crypto');
 const moment = require('moment');
-const { utilizadores, auth_users } = require('../src/models');
-factory.define('User', utilizadores, {
+const { Utilizadores, Auth } = require('../src/models');
+factory.define('User', Utilizadores, {
     nome: 'Tomás Dinis Marques Figueiredo',
     procNumber: '16802',
     password: '1234',
@@ -17,7 +17,7 @@ const devices = Array("mobile", "web");
 const current_date = (new Date()).valueOf().toString();
 const random = Math.random().toString();
 
-factory.define('RandUser', utilizadores, {
+factory.define('RandUser', Utilizadores, {
     nome: () => joker.name.findName(),
     procNumber: () => (Math.floor(Math.random() * (99999 - 11111 + 1)) + 11111),
     password: () => joker.internet.password(),
@@ -26,7 +26,7 @@ factory.define('RandUser', utilizadores, {
     foto: 'default.png'
 });
 
-factory.define('createLogin', auth_users, {
+factory.define('createLogin', Auth, {
     hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
     idUser: 1,
     expirationTime: moment(new Date()).add(10, 'm').toDate(),

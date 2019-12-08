@@ -1,5 +1,5 @@
 'use strict';
-const { Salas, Profs, Disciplinas, Horarios, Turmas, DiasDaSemana } = require('../models');
+const { Salas, Profs, Disciplinas, Horarios, Turmas, DiasDaSemana, Tempos } = require('../models');
 const crypto = require('crypto');
 module.exports = {
     async novaSala(req, res){
@@ -8,7 +8,7 @@ module.exports = {
         const current_date = (new Date()).valueOf().toString();
         const random = Math.random().toString();
         const newSala = await Salas.create({
-            upSala,
+            sala: upSala,
             hash: crypto.createHash('sha1').update(current_date + random).digest('hex'),
         });
         return res.status(201).json({
@@ -71,20 +71,17 @@ module.exports = {
                 "status": `O dia com o id ${idDia} não existe!`
             });
         }
-        //Salas
-        await sala.addProfssala(prof);
-        await sala.addTurmasSala(turma);
-        await sala.addSalasdisciplina(disciplina);
-        await sala.addSalashorario(hora);
-        await sala.addSalasDia(dia);
-        //Profs
-        await prof.addDisciplinasProf(disciplina);
-        await prof.addTurmasProf(turma);
-        // Disciplinas
-        await disciplina.addTurmasDisciplina(turma);
-
+        await Tempos.create({
+            idHora,
+            idSala,
+            idDia,
+            idDisciplina,
+            idProf,
+            idTurma,
+            ativa: 1
+        });
         return res.status(201).json({
-            "status": `Sucesso o horario foi criado com sucesso!`
+            "status": `Sucesso, o horario foi criado!`
         });
 
     }

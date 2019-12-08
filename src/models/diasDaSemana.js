@@ -6,8 +6,5 @@ module.exports = (sequelize, DataTypes) => {
         sequelize,
         tableName: 'DiasDaSemana'
     });
-    DiasDaSemana.associate = function(models) {
-        DiasDaSemana.belongsToMany(models.Salas, { foreignKey: 'idDia', through: 'DiasSalas', as: 'diasSalas' });
-    }
     return DiasDaSemana;
 };
