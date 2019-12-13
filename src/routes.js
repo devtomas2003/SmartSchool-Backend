@@ -5,6 +5,7 @@ const UserController = require('./controllers/UserController');
 const ProfController = require('./controllers/ProfsController');
 const LoginController = require('./controllers/LoginController');
 const PasswordRecover = require('./controllers/RecoverController');
+const temposController = require('./controllers/temposController');
 const disciplinaController = require('./controllers/disciplinaController');
 const salaController = require('./controllers/salaController');
 const turmaController = require('./controllers/TurmaController');
@@ -13,9 +14,10 @@ const adminAuth = require('./middleware/adminAuth');
 routes.post('/login', LoginController.index);
 routes.post('/recover', PasswordRecover.index);
 routes.use(authNormalUser);
-routes.post('/qrcode', (req, res) => {
+routes.post('/checkToken', (req, res) => {
     res.status(200).send();
 });
+routes.post('/qrcode', temposController.search);
 routes.use(adminAuth);
 routes.post('/users', UserController.store);
 routes.post('/prof', ProfController.store);
