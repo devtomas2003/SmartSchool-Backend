@@ -50,7 +50,8 @@ module.exports = {
             return res.status(200).json({
                 "professor": prof.nome,
                 "turma": turma.turma,
-                "disciplina": disciplina.disciplina
+                "disciplina": disciplina.disciplina,
+                "sala": nomeSala
             });
         }
     }
