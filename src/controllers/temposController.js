@@ -5,12 +5,19 @@ module.exports = {
     async search(req, res){
         const { time, hashSala } = req.body;
         const sala = await Salas.findOne({ where: { hash: hashSala }});
+        if(!sala){
+            return res.status(403).json({
+                "error": "O QrCode é invalido!",
+                "level": 2,
+                "showIn": "box"
+            });
+        }
         const idSala = sala.id;
         const nomeSala = sala.sala;
         var times = new Date(time);
         var day = times.getDay();
         if(day == 6 || day == 7){
-            return res.status(200).json({
+            return res.status(403).json({
                 "error": "Estás fora do horario letivo!",
                 "level": 2,
                 "showIn": "box"
@@ -30,7 +37,7 @@ module.exports = {
             }
         }
         if(outHorario == true){
-            return res.status(200).json({
+            return res.status(403).json({
                 "error": `Estás fora do horario letivo!`,
                 "level": 2,
                 "showIn": "box"
@@ -38,7 +45,7 @@ module.exports = {
         }
         const searchTime = await Tempos.findOne({ where: { idHora: actualTempo, idSala, idDia: day }});
         if(!searchTime){
-            return res.status(200).json({
+            return res.status(403).json({
                 "error": `Atualmente não está ninguem na sala ${nomeSala}!`,
                 "level": 2,
                 "showIn": "box"

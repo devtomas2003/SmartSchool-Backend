@@ -47,6 +47,7 @@ module.exports = {
             return res.status(200).json({
                 "hash": authenticate.hash,
                 "expiration": authenticate.expirationTime,
+                "name": userFinded.nome,
                 "versionPlatform": level
             });
         }else{
@@ -57,8 +58,20 @@ module.exports = {
             });
             return res.json({
                 "hash": hash.hash,
+                "name": userFinded.nome,
                 "versionPlatform": "comum"
             });
         }
+    },
+    async search(req, res){
+        const { authorization } = req.headers;
+        const [, token] = authorization.split(" ");
+        const verifyToken = await Auth.findOne({ where: { hash: token }});
+        const userId = verifyToken.idUser;
+        const getUser = await Utilizadores.findByPk(userId);
+        const name = getUser.nome;
+        return res.json({
+            name
+        });
     }
 };
