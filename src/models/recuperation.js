@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
     const RecuperationPass = sequelize.define('RecuperationPass', {
         hash: DataTypes.STRING,
+        idUser: DataTypes.INTEGER,
         expirationTime: DataTypes.DATE,
         ativo: DataTypes.INTEGER
     }, {
