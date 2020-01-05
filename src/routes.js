@@ -21,6 +21,7 @@ routes.get('/ativar/:hash', RegisterController.activateAccount);
 routes.get('/getPass/:hash', PasswordRecover.getPass);
 routes.post('/getTurmas', turmaController.show);
 routes.use(authNormalUser);
+routes.post('/changePass', LoginController.reset);
 routes.post('/checkToken', LoginController.search);
 routes.post('/qrcode', temposController.search);
 routes.use(adminAuth);

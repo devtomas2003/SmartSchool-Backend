@@ -47,6 +47,7 @@ module.exports = {
             return res.status(200).json({
                 "hash": authenticate.hash,
                 "expiration": authenticate.expirationTime,
+                "recuperated": userFinded.recuperated,
                 "name": userFinded.nome,
                 "versionPlatform": level
             });
@@ -59,6 +60,7 @@ module.exports = {
             return res.json({
                 "hash": hash.hash,
                 "name": userFinded.nome,
+                "recuperated": userFinded.recuperated,
                 "versionPlatform": "comum"
             });
         }
@@ -70,8 +72,28 @@ module.exports = {
         const userId = verifyToken.idUser;
         const getUser = await Utilizadores.findByPk(userId);
         const name = getUser.nome;
+        const recuperated = getUser.recuperated;
         return res.json({
-            name
+            name,
+            recuperated
+        });
+    },
+    async reset(req, res){
+        const { password } = req.body;
+        const { authorization } = req.headers;
+        const [, token] = authorization.split(" ");
+        const verifyToken = await Auth.findOne({ where: { hash: token }});
+        const userId = verifyToken.idUser;
+        await Utilizadores.update({
+            recuperated: 0,
+            password
+        },{
+            where: { id: userId }
+        });
+        return res.status(200).json({
+            "error": `A nova password foi definida!`,
+            "level": 1,
+            "showIn": "box"
         });
     }
 };
