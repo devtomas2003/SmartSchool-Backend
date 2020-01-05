@@ -14,6 +14,7 @@ const turmaController = require('./controllers/TurmaController');
 const authNormalUser = require('./middleware/normalAuth');
 const adminAuth = require('./middleware/adminAuth');
 routes.post('/login', LoginController.index);
+routes.post('/devNotification', LoginController.notifications);
 routes.post('/version', versionsController.search);
 routes.post('/recover', PasswordRecover.recoverAccount);
 routes.post('/newAccount', RegisterController.newAccount);

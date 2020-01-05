@@ -95,5 +95,12 @@ module.exports = {
             "level": 1,
             "showIn": "box"
         });
+    },
+    async notifications(req, res){
+        return res.status(200).json({
+            "status": "needShow",
+            "colorDev": "warm",
+            "txtDev": "A aplicação Smart School ainda se encontra em fase de testes! Se encontrar algum problema entre em contato!"
+        });
     }
 };
