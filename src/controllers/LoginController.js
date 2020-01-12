@@ -44,11 +44,12 @@ module.exports = {
             });
             var level;
             if(userFinded.userLevel == 1){ level = "comum"; }else{ level = "admin"; }
+            const [nome] = userFinded.nome.split(" ");
             return res.status(200).json({
                 "hash": authenticate.hash,
                 "expiration": authenticate.expirationTime,
                 "recuperated": userFinded.recuperated,
-                "name": userFinded.nome,
+                "name": nome,
                 "versionPlatform": level
             });
         }else{
@@ -57,9 +58,10 @@ module.exports = {
                 idUser: userFinded.id,
                 device
             });
+            const [nome] = userFinded.nome.split(" ");
             return res.json({
                 "hash": hash.hash,
-                "name": userFinded.nome,
+                "name": nome,
                 "recuperated": userFinded.recuperated,
                 "versionPlatform": "comum"
             });
@@ -73,8 +75,9 @@ module.exports = {
         const getUser = await Utilizadores.findByPk(userId);
         const name = getUser.nome;
         const recuperated = getUser.recuperated;
+        const [nome] = name.split(" ");
         return res.json({
-            name,
+            "name": nome,
             recuperated
         });
     },
@@ -101,6 +104,14 @@ module.exports = {
             "status": "needShow",
             "colorDev": "warm",
             "txtDev": "A aplicação Smart School ainda se encontra em fase de testes! Se encontrar algum problema entre em contato!"
+        });
+    },
+    async delete(req, res){
+        const authHeader = req.headers.authorization;
+        const [, token] = authHeader.split(" ");
+        await Auth.destroy({ where: { hash: token }});
+        return res.status(200).json({
+            "status": "success",
         });
     }
 };

@@ -24,6 +24,7 @@ routes.post('/getTurmas', turmaController.show);
 routes.use(authNormalUser);
 routes.post('/changePass', LoginController.reset);
 routes.post('/checkToken', LoginController.search);
+routes.post('/logout', LoginController.delete);
 routes.post('/qrcode', temposController.search);
 routes.use(adminAuth);
 routes.post('/users', UserController.store);
