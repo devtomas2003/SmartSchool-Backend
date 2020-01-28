@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Versions = sequelize.define('versions', {
         version: DataTypes.STRING,
-        forceDownload: DataTypes.INTEGER
+        forceDownload: DataTypes.INTEGER,
+        tablesChecksum: DataTypes.STRING
     }, {
         sequelize,
         tableName: 'versions'
