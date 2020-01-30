@@ -10,9 +10,7 @@ module.exports = {
         const getSalas = await Salas.findAll({ raw: true });
         const getTempos = await Tempos.findAll({ raw: true });
         const getTurmas = await Turmas.findAll({ raw: true });
-        const hashSum = await versions.findAll({ raw: true });
         return res.status(200).json({
-            "validationHash": hashSum[0].tablesChecksum,
             "disciplinas": getDisciplinas,
             "horarios": getHorarios,
             "diasDaSemana": getDiasDaSemana,
@@ -20,6 +18,12 @@ module.exports = {
             "salas": getSalas,
             "tempos": getTempos,
             "turmas": getTurmas
+        });
+    },
+    async getHash(req, res){
+        const hashSum = await versions.findAll({ raw: true });
+        return res.status(200).json({
+            "horariosHash": hashSum[0].tablesChecksum
         });
     }
 };

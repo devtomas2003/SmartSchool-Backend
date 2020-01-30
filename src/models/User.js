@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         userLevel: DataTypes.INTEGER,
         ativo: DataTypes.INTEGER,
         firstAccess: DataTypes.INTEGER,
-        recuperated: DataTypes.INTEGER
+        recuperated: DataTypes.INTEGER,
+        checksum: DataTypes.STRING
     },{
         sequelize,
         tableName: 'Utilizadores'
